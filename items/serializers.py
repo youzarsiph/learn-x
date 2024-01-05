@@ -16,4 +16,9 @@ class ItemSerializer(HyperlinkedModelSerializer):
         fields = [
             "id",
             "url",
+            "module",
+            "title",
+            "content",
+            "created_at",
+            "updated_at",
         ]

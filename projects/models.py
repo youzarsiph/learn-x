@@ -2,11 +2,38 @@
 
 
 from django.db import models
-from django.contrib.auth.models import AbstractUser
 
 
 # Create your models here.
-class Project(AbstractUser):
+class Project(models.Model):
     """Projects"""
 
-    pass
+    course = models.ForeignKey(
+        "courses.Course",
+        on_delete=models.CASCADE,
+        related_name="projects",
+        help_text="Project course",
+    )
+    name = models.CharField(
+        max_length=32,
+        db_index=True,
+        help_text="Project name",
+    )
+    description = models.CharField(
+        max_length=256,
+        help_text="Project description",
+    )
+    content = models.TextField(
+        help_text="Project content",
+    )
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+        help_text="Date created",
+    )
+    updated_at = models.DateTimeField(
+        auto_now=True,
+        help_text="Last update",
+    )
+
+    def __str__(self) -> str:
+        return self.name

@@ -13,7 +13,14 @@ class ProjectSerializer(HyperlinkedModelSerializer):
         """Meta data"""
 
         model = Project
+        read_only_fields = ["course"]
         fields = [
             "id",
             "url",
+            "course",
+            "name",
+            "description",
+            "content",
+            "created_at",
+            "updated_at",
         ]

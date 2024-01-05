@@ -3,17 +3,14 @@
 
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
+from learn_x.projects.views import ProjectViewSet, ProjectImageView
 
 
 # Create your patterns here.
 router = DefaultRouter(trailing_slash=False)
-
-sub_router = DefaultRouter()
+router.register("projects", ProjectViewSet, "project")
 
 urlpatterns = [
     path("", include(router.urls)),
-    path(
-        "/<int:id>/",
-        include((sub_router.urls, ""), namespace=""),
-    ),
+    path("projects/<int:pk>/image", ProjectImageView.as_view()),
 ]

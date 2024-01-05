@@ -16,4 +16,10 @@ class CourseSerializer(HyperlinkedModelSerializer):
         fields = [
             "id",
             "url",
+            "image",
+            "name",
+            "headline",
+            "description",
+            "created_at",
+            "updated_at",
         ]

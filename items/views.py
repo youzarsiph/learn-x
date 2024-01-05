@@ -1,29 +1,59 @@
 """ API endpoints for learn_x.items """
 
 
+from rest_framework import permissions
 from rest_framework.viewsets import ModelViewSet
-from rest_framework.permissions import IsAdminUser, IsAuthenticated
-from learn_x.mixins import OwnerMixin
-from learn_x.permissions import IsOwner
+from learn_x.courses.models import Course
 from learn_x.items.models import Item
 from learn_x.items.serializers import ItemSerializer
+from learn_x.modules.models import Module
 
 
 # Create your views here.
-class ItemViewSet(OwnerMixin, ModelViewSet):
+class ItemViewSet(ModelViewSet):
     """Create, view, update and delete Items"""
 
     queryset = Item.objects.all()
     serializer_class = ItemSerializer
-    permission_classes = [IsAuthenticated]
-    search_fields = ["name", "headline", "description"]
-    ordering_fields = ["id", "name", "created_at", "updated_at"]
-    filterset_fields = ["name"]
+    permission_classes = [permissions.IsAuthenticated, permissions.IsAdminUser]
+    search_fields = ["title"]
+    ordering_fields = ["id", "created_at", "updated_at"]
+    filterset_fields = ["title"]
 
     def get_permissions(self):
-        if self.action in ["update", "partial_update", "destroy"]:
-            self.permission_classes += [IsOwner]
-        elif self.action in ["approve", "list"]:
-            self.permission_classes += [IsAdminUser]
+        if self.action in ["list", "retrieve"]:
+            self.permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
         return super().get_permissions()
+
+
+class CourseItemsViewSet(ItemViewSet):
+    """Course Items"""
+
+    def get_queryset(self):
+        """Filter queryset by course"""
+
+        course = Course.objects.get(pk=self.kwargs["id"])
+        return super().get_queryset().filter(course=course)
+
+    def perform_create(self, serializer):
+        """Add course to Item"""
+
+        course = Course.objects.get(pk=self.kwargs["id"])
+        serializer.save(course=course)
+
+
+class ModuleItemsViewSet(ItemViewSet):
+    """Module Items"""
+
+    def get_queryset(self):
+        """Filter queryset by Module"""
+
+        module = Module.objects.get(pk=self.kwargs["id"])
+        return super().get_queryset().filter(module=module)
+
+    def perform_create(self, serializer):
+        """Add Module to Item"""
+
+        module = Module.objects.get(pk=self.kwargs["id"])
+        serializer.save(module=module)

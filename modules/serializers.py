@@ -13,7 +13,13 @@ class ModuleSerializer(HyperlinkedModelSerializer):
         """Meta data"""
 
         model = Module
+        read_only_fields = ["course"]
         fields = [
             "id",
             "url",
+            "course",
+            "title",
+            "description",
+            "created_at",
+            "updated_at",
         ]

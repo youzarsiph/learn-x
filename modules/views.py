@@ -1,29 +1,42 @@
 """ API endpoints for learn_x.modules """
 
 
+from rest_framework import permissions
 from rest_framework.viewsets import ModelViewSet
-from rest_framework.permissions import IsAdminUser, IsAuthenticated
-from learn_x.mixins import OwnerMixin
-from learn_x.permissions import IsOwner
+from learn_x.courses.models import Course
 from learn_x.modules.models import Module
 from learn_x.modules.serializers import ModuleSerializer
 
 
 # Create your views here.
-class ModuleViewSet(OwnerMixin, ModelViewSet):
+class ModuleViewSet(ModelViewSet):
     """Create, view, update and delete Modules"""
 
     queryset = Module.objects.all()
     serializer_class = ModuleSerializer
-    permission_classes = [IsAuthenticated]
-    search_fields = ["name", "headline", "description"]
-    ordering_fields = ["id", "name", "created_at", "updated_at"]
-    filterset_fields = ["name"]
+    permission_classes = [permissions.IsAuthenticated, permissions.IsAdminUser]
+    search_fields = ["title", "description"]
+    ordering_fields = ["id", "title", "created_at", "updated_at"]
+    filterset_fields = ["title", "course"]
 
     def get_permissions(self):
-        if self.action in ["update", "partial_update", "destroy"]:
-            self.permission_classes += [IsOwner]
-        elif self.action in ["approve", "list"]:
-            self.permission_classes += [IsAdminUser]
+        if self.action in ["list", "retrieve"]:
+            self.permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
         return super().get_permissions()
+
+
+class CourseModulesViewSet(ModuleViewSet):
+    """Course Modules"""
+
+    def get_queryset(self):
+        """Filter queryset by course"""
+
+        course = Course.objects.get(pk=self.kwargs["id"])
+        return super().get_queryset().filter(course=course)
+
+    def perform_create(self, serializer):
+        """Add course to module"""
+
+        course = Course.objects.get(pk=self.kwargs["id"])
+        serializer.save(course=course)

@@ -8,7 +8,7 @@ from rest_framework.routers import DefaultRouter
 # Create your patterns here.
 router = DefaultRouter(trailing_slash=False)
 
-sub_router = DefaultRouter()
+sub_router = DefaultRouter(trailing_slash=False)
 
 urlpatterns = [
     path("", include(router.urls)),
