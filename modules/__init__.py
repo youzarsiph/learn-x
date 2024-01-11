@@ -1,1 +1,1 @@
-""" Course Modules """
+""" LearnX Course Modules """

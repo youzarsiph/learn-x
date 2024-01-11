@@ -1,4 +1,4 @@
-""" Data Models for learn_x """
+""" Data Models for LearnX """
 
 
 from django.db import models

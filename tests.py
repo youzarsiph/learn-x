@@ -1,4 +1,4 @@
-""" Tests for learn_x """
+""" Tests for LearnX """
 
 
 from django.test import TestCase

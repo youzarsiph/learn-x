@@ -1,1 +1,1 @@
-""" Courses """
+""" LearnX Courses """

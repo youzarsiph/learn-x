@@ -1,12 +1,12 @@
 """ Serializers for learn_x.courses """
 
 
-from rest_framework.serializers import HyperlinkedModelSerializer
+from rest_framework.serializers import ModelSerializer
 from learn_x.courses.models import Course
 
 
 # Create your serializers here.
-class CourseSerializer(HyperlinkedModelSerializer):
+class CourseSerializer(ModelSerializer):
     """Course serializer"""
 
     class Meta:

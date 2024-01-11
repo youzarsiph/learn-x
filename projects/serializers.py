@@ -1,12 +1,12 @@
 """ Serializers for learn_x.projects """
 
 
-from rest_framework.serializers import HyperlinkedModelSerializer
+from rest_framework.serializers import ModelSerializer
 from learn_x.projects.models import Project
 
 
 # Create your serializers here.
-class ProjectSerializer(HyperlinkedModelSerializer):
+class ProjectSerializer(ModelSerializer):
     """Project serializer"""
 
     class Meta:

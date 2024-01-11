@@ -1,1 +1,1 @@
-""" Learn-X, Course management system for learning programming """
+""" LearnX, Course management system for learning programming """

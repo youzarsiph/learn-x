@@ -1,12 +1,12 @@
 """ Serializers for learn_x.items """
 
 
-from rest_framework.serializers import HyperlinkedModelSerializer
+from rest_framework.serializers import ModelSerializer
 from learn_x.items.models import Item
 
 
 # Create your serializers here.
-class ItemSerializer(HyperlinkedModelSerializer):
+class ItemSerializer(ModelSerializer):
     """Item serializer"""
 
     class Meta:

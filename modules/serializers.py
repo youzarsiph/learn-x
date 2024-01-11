@@ -1,12 +1,12 @@
 """ Serializers for learn_x.modules """
 
 
-from rest_framework.serializers import HyperlinkedModelSerializer
+from rest_framework.serializers import ModelSerializer
 from learn_x.modules.models import Module
 
 
 # Create your serializers here.
-class ModuleSerializer(HyperlinkedModelSerializer):
+class ModuleSerializer(ModelSerializer):
     """Module serializer"""
 
     class Meta:
