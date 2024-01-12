@@ -14,6 +14,10 @@ class Project(models.Model):
         related_name="projects",
         help_text="Project course",
     )
+    image = models.ImageField(
+        upload_to="images/projects/",
+        help_text="Course image",
+    )
     name = models.CharField(
         max_length=32,
         db_index=True,

@@ -11,8 +11,8 @@ class Item(models.Model):
     module = models.ForeignKey(
         "modules.Module",
         on_delete=models.CASCADE,
-        related_name="sections",
-        help_text="Section module",
+        related_name="items",
+        help_text="Item module",
     )
     title = models.CharField(
         max_length=64,

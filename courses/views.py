@@ -7,7 +7,7 @@ from django.views.generic import DetailView
 from rest_framework import permissions
 from rest_framework.viewsets import ModelViewSet
 from learn_x.courses.models import Course
-from learn_x.courses.serializers import CourseSerializer
+from learn_x.courses.serializers import DetailedCourseSerializer, CourseSerializer
 
 
 # Create your views here.
@@ -26,6 +26,12 @@ class CourseViewSet(ModelViewSet):
             self.permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
         return super().get_permissions()
+
+    def get_serializer_class(self):
+        if self.action == "retrieve":
+            self.serializer_class = DetailedCourseSerializer
+
+        return super().get_serializer_class()
 
 
 class CourseImageView(DetailView):

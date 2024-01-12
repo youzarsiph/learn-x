@@ -1,7 +1,7 @@
 """ Permissions """
 
 
-from rest_framework.permissions import BasePermission
+from rest_framework.permissions import BasePermission, SAFE_METHODS
 
 
 # Create your permissions here.
@@ -10,3 +10,10 @@ class IsOwner(BasePermission):
 
     def has_object_permission(self, request, view, obj):
         return request.user == obj.user
+
+
+class IsReadOnly(BasePermission):
+    """Allow only if the request is read only"""
+
+    def has_permission(self, request, view):
+        return request.method in SAFE_METHODS

@@ -18,6 +18,7 @@ class ProjectSerializer(ModelSerializer):
             "id",
             "url",
             "course",
+            "image",
             "name",
             "description",
             "content",

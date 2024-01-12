@@ -3,6 +3,7 @@
 
 from rest_framework import permissions
 from rest_framework.viewsets import ModelViewSet
+from learn_x.permissions import IsReadOnly
 from learn_x.courses.models import Course
 from learn_x.items.models import Item
 from learn_x.items.serializers import ItemSerializer
@@ -15,7 +16,11 @@ class ItemViewSet(ModelViewSet):
 
     queryset = Item.objects.all()
     serializer_class = ItemSerializer
-    permission_classes = [permissions.IsAuthenticated, permissions.IsAdminUser]
+    permission_classes = [
+        permissions.IsAuthenticated,
+        permissions.IsAdminUser,
+        IsReadOnly,
+    ]
     search_fields = ["title"]
     ordering_fields = ["id", "created_at", "updated_at"]
     filterset_fields = ["title"]
@@ -34,17 +39,13 @@ class CourseItemsViewSet(ItemViewSet):
         """Filter queryset by course"""
 
         course = Course.objects.get(pk=self.kwargs["id"])
-        return super().get_queryset().filter(course=course)
-
-    def perform_create(self, serializer):
-        """Add course to Item"""
-
-        course = Course.objects.get(pk=self.kwargs["id"])
-        serializer.save(course=course)
+        return super().get_queryset().filter(module__course=course)
 
 
 class ModuleItemsViewSet(ItemViewSet):
     """Module Items"""
+
+    permission_classes = [permissions.IsAuthenticated, permissions.IsAdminUser]
 
     def get_queryset(self):
         """Filter queryset by Module"""

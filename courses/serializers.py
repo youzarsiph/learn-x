@@ -23,3 +23,16 @@ class CourseSerializer(ModelSerializer):
             "created_at",
             "updated_at",
         ]
+
+
+class DetailedCourseSerializer(CourseSerializer):
+    """Course serializer"""
+
+    class Meta(CourseSerializer.Meta):
+        """Meta data"""
+
+        depth = 1
+        fields = CourseSerializer.Meta.fields + [
+            "modules",
+            "projects",
+        ]
