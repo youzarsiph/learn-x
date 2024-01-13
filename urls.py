@@ -14,4 +14,5 @@ urlpatterns = [
     path("", include("learn_x.items.urls")),
     path("", include("learn_x.modules.urls")),
     path("", include("learn_x.projects.urls")),
+    path("", include("learn_x.paths.urls")),
 ]

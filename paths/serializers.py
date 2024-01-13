@@ -1,18 +1,18 @@
-""" Serializers for learn_x.courses """
+""" Serializers for learn_x.paths """
 
 
 from rest_framework.serializers import ModelSerializer
-from learn_x.courses.models import Course
+from learn_x.paths.models import Path
 
 
 # Create your serializers here.
-class CourseSerializer(ModelSerializer):
-    """Course serializer"""
+class PathSerializer(ModelSerializer):
+    """Path serializer"""
 
     class Meta:
         """Meta data"""
 
-        model = Course
+        model = Path
         fields = [
             "id",
             "url",
@@ -20,18 +20,17 @@ class CourseSerializer(ModelSerializer):
             "name",
             "headline",
             "description",
-            "path_set",
-            "modules",
-            "projects",
             "created_at",
             "updated_at",
+            "courses",
+            "projects",
         ]
 
 
-class DetailedCourseSerializer(CourseSerializer):
-    """Course serializer"""
+class DetailedPathSerializer(PathSerializer):
+    """Path serializer"""
 
-    class Meta(CourseSerializer.Meta):
+    class Meta(PathSerializer.Meta):
         """Meta data"""
 
         depth = 1

@@ -1,4 +1,4 @@
-""" API endpoints for learn_x.courses """
+""" API endpoints for learn_x.paths """
 
 
 from typing import Any
@@ -6,17 +6,16 @@ from django.http import FileResponse, HttpRequest
 from django.views.generic import DetailView
 from rest_framework import permissions
 from rest_framework.viewsets import ModelViewSet
-from learn_x.courses.models import Course
-from learn_x.courses.serializers import DetailedCourseSerializer, CourseSerializer
 from learn_x.paths.models import Path
+from learn_x.paths.serializers import DetailedPathSerializer, PathSerializer
 
 
 # Create your views here.
-class CourseViewSet(ModelViewSet):
-    """Create, view, update and delete Courses"""
+class PathViewSet(ModelViewSet):
+    """Create, view, update and delete Paths"""
 
-    queryset = Course.objects.all()
-    serializer_class = DetailedCourseSerializer
+    queryset = Path.objects.all()
+    serializer_class = DetailedPathSerializer
     permission_classes = [permissions.IsAuthenticated, permissions.IsAdminUser]
     search_fields = ["name", "headline", "description"]
     ordering_fields = ["id", "name", "created_at", "updated_at"]
@@ -30,25 +29,15 @@ class CourseViewSet(ModelViewSet):
 
     def get_serializer_class(self):
         if self.action in ["create", "update", "partial_update"]:
-            self.serializer_class = CourseSerializer
+            self.serializer_class = PathSerializer
 
         return super().get_serializer_class()
 
 
-class CourseImageView(DetailView):
-    """Course profile image"""
+class PathImageView(DetailView):
+    """Path profile image"""
 
-    model = Course
+    model = Path
 
     def get(self, request: HttpRequest, *args: Any, **kwargs: Any) -> FileResponse:
         return FileResponse(open(self.get_object(self.queryset).image.url[1:], "rb"))
-
-
-class PathCoursesViewSet(CourseViewSet):
-    """Courses of a learning path"""
-
-    def get_queryset(self):
-        """Filter queryset by path"""
-
-        path = Path.objects.get(pk=self.kwargs["id"])
-        return super().get_queryset().filter(paths=path)

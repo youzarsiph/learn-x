@@ -6,6 +6,7 @@ from django.http import FileResponse, HttpRequest
 from django.views.generic import DetailView
 from rest_framework import permissions
 from rest_framework.viewsets import ModelViewSet
+from learn_x.paths.models import Path
 from learn_x.permissions import IsReadOnly
 from learn_x.courses.models import Course
 from learn_x.projects.models import Project
@@ -59,3 +60,21 @@ class CourseProjectsViewSet(ProjectViewSet):
 
         course = Course.objects.get(pk=self.kwargs["id"])
         serializer.save(course=course)
+
+
+class PathProjectsViewSet(ProjectViewSet):
+    """Path Projects"""
+
+    permission_classes = [permissions.IsAuthenticated, permissions.IsAdminUser]
+
+    def get_queryset(self):
+        """Filter queryset by path"""
+
+        path = Path.objects.get(pk=self.kwargs["id"])
+        return super().get_queryset().filter(path=path)
+
+    def perform_create(self, serializer):
+        """Add path to Item"""
+
+        path = Path.objects.get(pk=self.kwargs["id"])
+        serializer.save(path=path)

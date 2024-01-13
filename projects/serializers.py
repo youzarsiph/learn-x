@@ -13,10 +13,11 @@ class ProjectSerializer(ModelSerializer):
         """Meta data"""
 
         model = Project
-        read_only_fields = ["course"]
+        read_only_fields = ["path", "course"]
         fields = [
             "id",
             "url",
+            "path",
             "course",
             "image",
             "name",
