@@ -21,12 +21,6 @@ class PathViewSet(ModelViewSet):
     ordering_fields = ["id", "name", "created_at", "updated_at"]
     filterset_fields = ["name"]
 
-    def get_permissions(self):
-        if self.action in ["list", "retrieve"]:
-            self.permission_classes = [permissions.IsAuthenticatedOrReadOnly]
-
-        return super().get_permissions()
-
     def get_serializer_class(self):
         if self.action in ["create", "update", "partial_update"]:
             self.serializer_class = PathSerializer

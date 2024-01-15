@@ -6,6 +6,7 @@ from django.http import FileResponse, HttpRequest
 from django.views.generic import DetailView
 from rest_framework import permissions
 from rest_framework.viewsets import ModelViewSet
+from learn_x.permissions import IsReadOnly
 from learn_x.courses.models import Course
 from learn_x.courses.serializers import DetailedCourseSerializer, CourseSerializer
 from learn_x.paths.models import Path
@@ -21,12 +22,6 @@ class CourseViewSet(ModelViewSet):
     search_fields = ["name", "headline", "description"]
     ordering_fields = ["id", "name", "created_at", "updated_at"]
     filterset_fields = ["name"]
-
-    def get_permissions(self):
-        if self.action in ["list", "retrieve"]:
-            self.permission_classes = [permissions.IsAuthenticatedOrReadOnly]
-
-        return super().get_permissions()
 
     def get_serializer_class(self):
         if self.action in ["create", "update", "partial_update"]:
@@ -47,8 +42,14 @@ class CourseImageView(DetailView):
 class PathCoursesViewSet(CourseViewSet):
     """Courses of a learning path"""
 
+    permission_classes = [
+        IsReadOnly,
+        permissions.IsAuthenticated,
+        permissions.IsAdminUser,
+    ]
+
     def get_queryset(self):
         """Filter queryset by path"""
 
         path = Path.objects.get(pk=self.kwargs["id"])
-        return super().get_queryset().filter(paths=path)
+        return super().get_queryset().filter(path=path)

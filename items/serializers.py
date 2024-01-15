@@ -13,6 +13,7 @@ class ItemSerializer(ModelSerializer):
         """Meta data"""
 
         model = Item
+        read_only_fields = ["module"]
         fields = [
             "id",
             "url",

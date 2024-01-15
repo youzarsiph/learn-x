@@ -6,8 +6,8 @@ from django.http import FileResponse, HttpRequest
 from django.views.generic import DetailView
 from rest_framework import permissions
 from rest_framework.viewsets import ModelViewSet
-from learn_x.paths.models import Path
 from learn_x.permissions import IsReadOnly
+from learn_x.paths.models import Path
 from learn_x.courses.models import Course
 from learn_x.projects.models import Project
 from learn_x.projects.serializers import ProjectSerializer
@@ -19,20 +19,10 @@ class ProjectViewSet(ModelViewSet):
 
     queryset = Project.objects.all()
     serializer_class = ProjectSerializer
-    permission_classes = [
-        permissions.IsAuthenticated,
-        permissions.IsAdminUser,
-        IsReadOnly,
-    ]
+    permission_classes = [permissions.IsAuthenticated, permissions.IsAdminUser]
     search_fields = ["name", "description", "content"]
     ordering_fields = ["id", "name", "created_at", "updated_at"]
-    filterset_fields = ["course", "name"]
-
-    def get_permissions(self):
-        if self.action in ["list", "retrieve"]:
-            self.permission_classes = [permissions.IsAuthenticatedOrReadOnly]
-
-        return super().get_permissions()
+    filterset_fields = ["name"]
 
 
 class ProjectImageView(DetailView):
@@ -47,7 +37,11 @@ class ProjectImageView(DetailView):
 class CourseProjectsViewSet(ProjectViewSet):
     """Course Projects"""
 
-    permission_classes = [permissions.IsAuthenticated, permissions.IsAdminUser]
+    permission_classes = [
+        IsReadOnly,
+        permissions.IsAuthenticated,
+        permissions.IsAdminUser,
+    ]
 
     def get_queryset(self):
         """Filter queryset by course"""
@@ -55,26 +49,18 @@ class CourseProjectsViewSet(ProjectViewSet):
         course = Course.objects.get(pk=self.kwargs["id"])
         return super().get_queryset().filter(course=course)
 
-    def perform_create(self, serializer):
-        """Add course to Item"""
-
-        course = Course.objects.get(pk=self.kwargs["id"])
-        serializer.save(course=course)
-
 
 class PathProjectsViewSet(ProjectViewSet):
-    """Path Projects"""
+    """Learning Path Projects"""
 
-    permission_classes = [permissions.IsAuthenticated, permissions.IsAdminUser]
+    permission_classes = [
+        IsReadOnly,
+        permissions.IsAuthenticated,
+        permissions.IsAdminUser,
+    ]
 
     def get_queryset(self):
-        """Filter queryset by path"""
+        """Filter queryset by learning path"""
 
         path = Path.objects.get(pk=self.kwargs["id"])
         return super().get_queryset().filter(path=path)
-
-    def perform_create(self, serializer):
-        """Add path to Item"""
-
-        path = Path.objects.get(pk=self.kwargs["id"])
-        serializer.save(path=path)

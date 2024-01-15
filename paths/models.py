@@ -30,7 +30,13 @@ class Path(models.Model):
     )
     courses = models.ManyToManyField(
         "courses.Course",
+        blank=True,
         help_text="Learning path courses",
+    )
+    projects = models.ManyToManyField(
+        "projects.Project",
+        blank=True,
+        help_text="Learning path projects",
     )
     created_at = models.DateTimeField(
         auto_now_add=True,

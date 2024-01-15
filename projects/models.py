@@ -8,28 +8,13 @@ from django.db import models
 class Project(models.Model):
     """Projects"""
 
-    path = models.ForeignKey(
-        "paths.Path",
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        related_name="projects",
-        help_text="Project learning path",
-    )
-    course = models.ForeignKey(
-        "courses.Course",
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        related_name="projects",
-        help_text="Project course",
-    )
     image = models.ImageField(
         upload_to="images/projects/",
-        help_text="Course image",
+        help_text="Project image",
     )
     name = models.CharField(
         max_length=32,
+        unique=True,
         db_index=True,
         help_text="Project name",
     )

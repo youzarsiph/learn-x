@@ -20,11 +20,10 @@ class CourseSerializer(ModelSerializer):
             "name",
             "headline",
             "description",
-            "path_set",
-            "modules",
-            "projects",
             "created_at",
             "updated_at",
+            "modules",
+            "projects",
         ]
 
 

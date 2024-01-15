@@ -24,12 +24,6 @@ class ModuleViewSet(ModelViewSet):
     ordering_fields = ["id", "title", "created_at", "updated_at"]
     filterset_fields = ["title", "course"]
 
-    def get_permissions(self):
-        if self.action in ["list", "retrieve"]:
-            self.permission_classes = [permissions.IsAuthenticatedOrReadOnly]
-
-        return super().get_permissions()
-
     def get_serializer_class(self):
         if self.action == "retrieve":
             self.serializer_class = DetailedModuleSerializer

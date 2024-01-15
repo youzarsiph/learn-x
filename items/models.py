@@ -20,6 +20,7 @@ class Item(models.Model):
     )
     content = models.JSONField(
         help_text="Item content",
+        default=lambda: dict(type="reading", content="Hello, World!"),
     )
     created_at = models.DateTimeField(
         auto_now_add=True,

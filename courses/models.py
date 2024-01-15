@@ -28,6 +28,11 @@ class Course(models.Model):
         db_index=True,
         help_text="Course description",
     )
+    projects = models.ManyToManyField(
+        "projects.Project",
+        blank=True,
+        help_text="Course projects",
+    )
     created_at = models.DateTimeField(
         auto_now_add=True,
         help_text="Date created",
