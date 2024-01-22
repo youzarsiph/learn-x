@@ -29,6 +29,12 @@ class CourseViewSet(ModelViewSet):
 
         return super().get_serializer_class()
 
+    def get_permissions(self):
+        if self.action in ["list", "retrieve"]:
+            self.permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+        return super().get_permissions()
+
 
 class CourseImageView(DetailView):
     """Course profile image"""

@@ -25,6 +25,12 @@ class ItemViewSet(ModelViewSet):
     ordering_fields = ["id", "created_at", "updated_at"]
     filterset_fields = ["title"]
 
+    def get_permissions(self):
+        if self.action in ["list", "retrieve"]:
+            self.permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+        return super().get_permissions()
+
 
 class CourseItemsViewSet(ItemViewSet):
     """Course Items"""

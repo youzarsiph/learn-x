@@ -27,6 +27,12 @@ class PathViewSet(ModelViewSet):
 
         return super().get_serializer_class()
 
+    def get_permissions(self):
+        if self.action in ["list", "retrieve"]:
+            self.permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+        return super().get_permissions()
+
 
 class PathImageView(DetailView):
     """Path profile image"""
