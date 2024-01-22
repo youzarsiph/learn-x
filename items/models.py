@@ -6,7 +6,7 @@ from django.db import models
 
 # Create your models here.
 class Item(models.Model):
-    """Items"""
+    """Course Items"""
 
     module = models.ForeignKey(
         "modules.Module",
@@ -19,8 +19,7 @@ class Item(models.Model):
         help_text="Item title",
     )
     content = models.JSONField(
-        help_text="Item content",
-        default=lambda: dict(type="reading", content="Hello, World!"),
+        help_text="Item content (JSON)",
     )
     created_at = models.DateTimeField(
         auto_now_add=True,
