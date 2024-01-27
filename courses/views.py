@@ -46,7 +46,7 @@ class CourseImageView(DetailView):
 
 
 class PathCoursesViewSet(CourseViewSet):
-    """Courses of a learning path"""
+    """List and retrieve Learning Path Courses"""
 
     permission_classes = [
         IsReadOnly,

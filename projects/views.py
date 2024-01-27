@@ -41,7 +41,7 @@ class ProjectImageView(DetailView):
 
 
 class CourseProjectsViewSet(ProjectViewSet):
-    """Course Projects"""
+    """List and retrieve Course Projects"""
 
     permission_classes = [
         IsReadOnly,
@@ -57,7 +57,7 @@ class CourseProjectsViewSet(ProjectViewSet):
 
 
 class PathProjectsViewSet(ProjectViewSet):
-    """Learning Path Projects"""
+    """List and retrieve Learning Path Projects"""
 
     permission_classes = [
         IsReadOnly,

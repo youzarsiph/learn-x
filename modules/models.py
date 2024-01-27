@@ -31,5 +31,11 @@ class Module(models.Model):
         help_text="Date updated",
     )
 
+    @property
+    def item_count(self) -> int:
+        """Number of items"""
+
+        return self.items.count()
+
     def __str__(self) -> str:
         return f"{self.course} {self.title}"

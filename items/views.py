@@ -12,7 +12,7 @@ from learn_x.modules.models import Module
 
 # Create your views here.
 class ItemViewSet(ModelViewSet):
-    """Create, view, update and delete Items"""
+    """List and retrieve Items"""
 
     queryset = Item.objects.all()
     serializer_class = ItemSerializer
@@ -33,7 +33,7 @@ class ItemViewSet(ModelViewSet):
 
 
 class CourseItemsViewSet(ItemViewSet):
-    """Course Items"""
+    """List and retrieve Course Items"""
 
     def get_queryset(self):
         """Filter queryset by course"""
@@ -43,7 +43,7 @@ class CourseItemsViewSet(ItemViewSet):
 
 
 class ModuleItemsViewSet(ItemViewSet):
-    """Module Items"""
+    """Create, read, update and delete Module Items"""
 
     permission_classes = [permissions.IsAuthenticated, permissions.IsAdminUser]
 

@@ -22,6 +22,8 @@ class CourseSerializer(ModelSerializer):
             "description",
             "created_at",
             "updated_at",
+            "item_count",
+            "module_count",
             "modules",
             "projects",
         ]

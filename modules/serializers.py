@@ -23,6 +23,7 @@ class ModuleSerializer(ModelSerializer):
             "description",
             "created_at",
             "updated_at",
+            "item_count",
         ]
 
 

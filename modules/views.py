@@ -11,14 +11,14 @@ from learn_x.modules.serializers import DetailedModuleSerializer, ModuleSerializ
 
 # Create your views here.
 class ModuleViewSet(ModelViewSet):
-    """Create, view, update and delete Modules"""
+    """List and retrieve Course Modules"""
 
     queryset = Module.objects.all()
     serializer_class = ModuleSerializer
     permission_classes = [
+        IsReadOnly,
         permissions.IsAuthenticated,
         permissions.IsAdminUser,
-        IsReadOnly,
     ]
     search_fields = ["title", "description"]
     ordering_fields = ["id", "title", "created_at", "updated_at"]
@@ -38,7 +38,7 @@ class ModuleViewSet(ModelViewSet):
 
 
 class CourseModulesViewSet(ModuleViewSet):
-    """Course Modules"""
+    """Create, read, update and delete Course Modules"""
 
     permission_classes = [permissions.IsAuthenticated, permissions.IsAdminUser]
 

@@ -42,5 +42,17 @@ class Course(models.Model):
         help_text="Date updated",
     )
 
+    @property
+    def module_count(self) -> int:
+        """Number of modules"""
+
+        return self.modules.count()
+
+    @property
+    def item_count(self) -> int:
+        """Number of items"""
+
+        return sum([module.items.count() for module in self.modules.all()])
+
     def __str__(self) -> str:
         return self.name
