@@ -9,6 +9,8 @@ class Path(models.Model):
     """Career Paths"""
 
     image = models.ImageField(
+        null=True,
+        blank=True,
         upload_to="images/paths/",
         help_text="Path image",
     )

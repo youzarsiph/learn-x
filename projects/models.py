@@ -9,6 +9,8 @@ class Project(models.Model):
     """Projects"""
 
     image = models.ImageField(
+        null=True,
+        blank=True,
         upload_to="images/projects/",
         help_text="Project image",
     )

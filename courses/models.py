@@ -9,6 +9,8 @@ class Course(models.Model):
     """Courses"""
 
     image = models.ImageField(
+        null=True,
+        blank=True,
         upload_to="images/courses/",
         help_text="Course image",
     )
