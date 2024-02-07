@@ -3,7 +3,7 @@
 
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from learn_x.paths.views import PathViewSet, PathImageView
+from learn_x.paths.views import PathViewSet
 from learn_x.courses.views import PathCoursesViewSet
 from learn_x.projects.views import PathProjectsViewSet
 
@@ -18,7 +18,6 @@ sub_router.register("projects", PathProjectsViewSet, "project")
 
 urlpatterns = [
     path("", include(router.urls)),
-    path("paths/<int:pk>/image", PathImageView.as_view()),
     path(
         "paths/<int:id>/",
         include((sub_router.urls, "paths"), namespace="paths"),

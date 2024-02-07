@@ -3,7 +3,7 @@
 
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from learn_x.projects.views import ProjectViewSet, ProjectImageView
+from learn_x.projects.views import ProjectViewSet
 
 
 # Create your patterns here.
@@ -12,5 +12,4 @@ router.register("projects", ProjectViewSet, "project")
 
 urlpatterns = [
     path("", include(router.urls)),
-    path("projects/<int:pk>/image", ProjectImageView.as_view()),
 ]

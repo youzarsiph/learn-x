@@ -1,9 +1,6 @@
 """ API endpoints for learn_x.courses """
 
 
-from typing import Any
-from django.http import FileResponse, HttpRequest
-from django.views.generic import DetailView
 from rest_framework import permissions
 from rest_framework.viewsets import ModelViewSet
 from learn_x.permissions import IsReadOnly
@@ -34,15 +31,6 @@ class CourseViewSet(ModelViewSet):
             self.permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
         return super().get_permissions()
-
-
-class CourseImageView(DetailView):
-    """Course profile image"""
-
-    model = Course
-
-    def get(self, request: HttpRequest, *args: Any, **kwargs: Any) -> FileResponse:
-        return FileResponse(open(self.get_object(self.queryset).image.url[1:], "rb"))
 
 
 class PathCoursesViewSet(CourseViewSet):
