@@ -34,7 +34,7 @@ class CourseViewSet(ModelViewSet):
 
 
 class PathCoursesViewSet(CourseViewSet):
-    """List and retrieve Learning Path Courses"""
+    """List and retrieve Career Path Courses"""
 
     permission_classes = [
         IsReadOnly,

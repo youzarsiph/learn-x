@@ -1,6 +1,5 @@
 """ API endpoints for learn_x.projects """
 
-
 from rest_framework import permissions
 from rest_framework.viewsets import ModelViewSet
 from learn_x.permissions import IsReadOnly
@@ -45,7 +44,7 @@ class CourseProjectsViewSet(ProjectViewSet):
 
 
 class PathProjectsViewSet(ProjectViewSet):
-    """List and retrieve Learning Path Projects"""
+    """List and retrieve Career Path Projects"""
 
     permission_classes = [
         IsReadOnly,
@@ -54,7 +53,7 @@ class PathProjectsViewSet(ProjectViewSet):
     ]
 
     def get_queryset(self):
-        """Filter queryset by learning path"""
+        """Filter queryset by career path"""
 
         path = Path.objects.get(pk=self.kwargs["id"])
         return super().get_queryset().filter(path=path)

@@ -6,7 +6,7 @@ from django.db import models
 
 # Create your models here.
 class Path(models.Model):
-    """Learning Paths"""
+    """Career Paths"""
 
     image = models.ImageField(
         upload_to="images/paths/",
@@ -31,12 +31,12 @@ class Path(models.Model):
     courses = models.ManyToManyField(
         "courses.Course",
         blank=True,
-        help_text="Learning path courses",
+        help_text="Career path courses",
     )
     projects = models.ManyToManyField(
         "projects.Project",
         blank=True,
-        help_text="Learning path projects",
+        help_text="Career path projects",
     )
     created_at = models.DateTimeField(
         auto_now_add=True,

@@ -1,1 +1,1 @@
-""" LearnX Learning Paths """
+""" LearnX Career Paths """
