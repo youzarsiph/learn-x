@@ -19,12 +19,12 @@ class Course(models.Model):
         help_text="Course name",
     )
     headline = models.CharField(
-        max_length=128,
+        max_length=512,
         db_index=True,
         help_text="Course headline",
     )
     description = models.CharField(
-        max_length=256,
+        max_length=1024,
         db_index=True,
         help_text="Course description",
     )

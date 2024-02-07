@@ -13,13 +13,13 @@ class Project(models.Model):
         help_text="Project image",
     )
     name = models.CharField(
-        max_length=32,
+        max_length=64,
         unique=True,
         db_index=True,
         help_text="Project name",
     )
     description = models.CharField(
-        max_length=256,
+        max_length=1024,
         help_text="Project description",
     )
     content = models.TextField(

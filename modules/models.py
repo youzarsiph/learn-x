@@ -19,7 +19,7 @@ class Module(models.Model):
         help_text="Module name",
     )
     description = models.CharField(
-        max_length=128,
+        max_length=1024,
         help_text="Module description",
     )
     created_at = models.DateTimeField(
