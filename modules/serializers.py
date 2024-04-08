@@ -1,6 +1,5 @@
 """ Serializers for learn_x.modules """
 
-
 import copy
 from rest_framework.serializers import ModelSerializer
 from learn_x.modules.models import Module

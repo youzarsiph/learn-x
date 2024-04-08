@@ -1,6 +1,5 @@
 """ URLConf for learn_x.paths """
 
-
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from learn_x.paths.views import PathViewSet

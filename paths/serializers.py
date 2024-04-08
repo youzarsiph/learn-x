@@ -1,6 +1,5 @@
 """ Serializers for learn_x.paths """
 
-
 from rest_framework.serializers import ModelSerializer
 from learn_x.paths.models import Path
 

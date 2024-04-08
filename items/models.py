@@ -1,6 +1,5 @@
 """ Data Models for learn_x.items """
 
-
 from django.db import models
 
 

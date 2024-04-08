@@ -1,6 +1,5 @@
 """ Serializers for learn_x.courses """
 
-
 from rest_framework.serializers import ModelSerializer
 from learn_x.courses.models import Course
 

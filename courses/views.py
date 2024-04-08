@@ -1,6 +1,5 @@
 """ API endpoints for learn_x.courses """
 
-
 from rest_framework import permissions
 from rest_framework.viewsets import ModelViewSet
 from learn_x.permissions import IsReadOnly

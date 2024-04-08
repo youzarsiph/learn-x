@@ -1,6 +1,5 @@
 """ API endpoints for learn_x.paths """
 
-
 from rest_framework import permissions
 from rest_framework.viewsets import ModelViewSet
 from learn_x.paths.models import Path

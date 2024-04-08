@@ -1,6 +1,5 @@
 """ Data Models for LearnX """
 
-
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
@@ -9,4 +8,9 @@ from django.contrib.auth.models import AbstractUser
 class User(AbstractUser):
     """Learn Users"""
 
-    pass
+    image = models.ImageField(
+        null=True,
+        blank=True,
+        help_text="Profile image",
+        upload_to="images/users/",
+    )

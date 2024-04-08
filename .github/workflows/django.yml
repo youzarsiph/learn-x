@@ -1,0 +1,40 @@
+name: Django CI
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 4
+      matrix:
+        python-version: [3.7, 3.8, 3.9]
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v3
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install django djangorestframework
+      - name: Create Django Project
+        run: |
+          python -m django startproject project
+      - name: Move learn_x to project
+        run: |
+          mv learn-x project/learn_x
+      - name: Add learn_x to INSTALLED_APPS
+        run: |
+          echo "INSTALLED_APPS += ['learn_x', 'learn_x.courses', 'learn_x.items', 'learn_x.modules', 'learn_x.paths', 'learn_x.projects', 'rest_framework']" >> project/settings.py
+      - name: Run Tests
+        run: |
+          cd project
+          python manage.py check
+          python manage.py test

@@ -1,6 +1,5 @@
 """ Serializers for learn_x.projects """
 
-
 from rest_framework.serializers import ModelSerializer
 from learn_x.projects.models import Project
 

@@ -1,6 +1,5 @@
 """ AppConf for learn_x.paths """
 
-
 from django.apps import AppConfig
 
 

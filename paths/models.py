@@ -1,6 +1,5 @@
 """ Data Models for learn_x.paths """
 
-
 from django.db import models
 
 

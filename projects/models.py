@@ -1,6 +1,5 @@
 """ Data Models for learn_x.projects """
 
-
 from django.db import models
 
 
