@@ -5,23 +5,40 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     initial = True
-
-    dependencies = [
-        ('modules', '0001_initial'),
-    ]
-
+    dependencies = [("modules", "0001_initial")]
     operations = [
         migrations.CreateModel(
-            name='Item',
+            name="Item",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(help_text='Item title', max_length=64)),
-                ('content', models.JSONField(help_text='Item content (JSON)')),
-                ('created_at', models.DateTimeField(auto_now_add=True, help_text='Date created')),
-                ('updated_at', models.DateTimeField(auto_now=True, help_text='Date updated')),
-                ('module', models.ForeignKey(help_text='Item module', on_delete=django.db.models.deletion.CASCADE, related_name='items', to='modules.module')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("title", models.CharField(help_text="Item title", max_length=64)),
+                ("content", models.JSONField(help_text="Item content (JSON)")),
+                (
+                    "created_at",
+                    models.DateTimeField(auto_now_add=True, help_text="Date created"),
+                ),
+                (
+                    "updated_at",
+                    models.DateTimeField(auto_now=True, help_text="Date updated"),
+                ),
+                (
+                    "module",
+                    models.ForeignKey(
+                        help_text="Item module",
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="items",
+                        to="modules.module",
+                    ),
+                ),
             ],
         ),
     ]

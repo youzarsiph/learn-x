@@ -5,23 +5,43 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     initial = True
-
-    dependencies = [
-        ('courses', '0001_initial'),
-    ]
-
+    dependencies = [("courses", "0001_initial")]
     operations = [
         migrations.CreateModel(
-            name='Module',
+            name="Module",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(help_text='Module name', max_length=64)),
-                ('description', models.CharField(help_text='Module description', max_length=1024)),
-                ('created_at', models.DateTimeField(auto_now_add=True, help_text='Date created')),
-                ('updated_at', models.DateTimeField(auto_now=True, help_text='Date updated')),
-                ('course', models.ForeignKey(help_text='Module course', on_delete=django.db.models.deletion.CASCADE, related_name='modules', to='courses.course')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("title", models.CharField(help_text="Module name", max_length=64)),
+                (
+                    "description",
+                    models.CharField(help_text="Module description", max_length=1024),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(auto_now_add=True, help_text="Date created"),
+                ),
+                (
+                    "updated_at",
+                    models.DateTimeField(auto_now=True, help_text="Date updated"),
+                ),
+                (
+                    "course",
+                    models.ForeignKey(
+                        help_text="Module course",
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="modules",
+                        to="courses.course",
+                    ),
+                ),
             ],
         ),
     ]

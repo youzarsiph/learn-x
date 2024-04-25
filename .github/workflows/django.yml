@@ -33,8 +33,13 @@ jobs:
       - name: Add learn_x to INSTALLED_APPS
         run: |
           echo "INSTALLED_APPS += ['learn_x', 'learn_x.courses', 'learn_x.items', 'learn_x.modules', 'learn_x.paths', 'learn_x.projects', 'rest_framework']" >> project/settings.py
-      - name: Run Tests
+      - name: Run migrate
         run: |
           cd project
+          python manage.py migrate
+      - name: Run check
+        run: |
           python manage.py check
+      - name: Run Tests
+        run: |
           python manage.py test

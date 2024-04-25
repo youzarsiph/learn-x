@@ -4,25 +4,65 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     initial = True
-
-    dependencies = [
-        ('projects', '0001_initial'),
-    ]
-
+    dependencies = [("projects", "0001_initial")]
     operations = [
         migrations.CreateModel(
-            name='Course',
+            name="Course",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('image', models.ImageField(blank=True, help_text='Course image', null=True, upload_to='images/courses/')),
-                ('name', models.CharField(db_index=True, help_text='Course name', max_length=64, unique=True)),
-                ('headline', models.CharField(db_index=True, help_text='Course headline', max_length=512)),
-                ('description', models.CharField(db_index=True, help_text='Course description', max_length=1024)),
-                ('created_at', models.DateTimeField(auto_now_add=True, help_text='Date created')),
-                ('updated_at', models.DateTimeField(auto_now=True, help_text='Date updated')),
-                ('projects', models.ManyToManyField(blank=True, help_text='Course projects', to='projects.project')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "image",
+                    models.ImageField(
+                        blank=True,
+                        help_text="Course image",
+                        null=True,
+                        upload_to="images/courses/",
+                    ),
+                ),
+                (
+                    "name",
+                    models.CharField(
+                        db_index=True,
+                        help_text="Course name",
+                        max_length=64,
+                        unique=True,
+                    ),
+                ),
+                (
+                    "headline",
+                    models.CharField(
+                        db_index=True, help_text="Course headline", max_length=512
+                    ),
+                ),
+                (
+                    "description",
+                    models.CharField(
+                        db_index=True, help_text="Course description", max_length=1024
+                    ),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(auto_now_add=True, help_text="Date created"),
+                ),
+                (
+                    "updated_at",
+                    models.DateTimeField(auto_now=True, help_text="Date updated"),
+                ),
+                (
+                    "projects",
+                    models.ManyToManyField(
+                        blank=True, help_text="Course projects", to="projects.project"
+                    ),
+                ),
             ],
         ),
     ]

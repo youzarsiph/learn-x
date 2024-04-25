@@ -4,27 +4,70 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     initial = True
-
-    dependencies = [
-        ('courses', '0001_initial'),
-        ('projects', '0001_initial'),
-    ]
-
+    dependencies = [("courses", "0001_initial"), ("projects", "0001_initial")]
     operations = [
         migrations.CreateModel(
-            name='Path',
+            name="Path",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('image', models.ImageField(blank=True, help_text='Path image', null=True, upload_to='images/paths/')),
-                ('name', models.CharField(db_index=True, help_text='Path name', max_length=64, unique=True)),
-                ('headline', models.CharField(db_index=True, help_text='Path headline', max_length=512)),
-                ('description', models.CharField(db_index=True, help_text='Path description', max_length=1024)),
-                ('created_at', models.DateTimeField(auto_now_add=True, help_text='Date created')),
-                ('updated_at', models.DateTimeField(auto_now=True, help_text='Date updated')),
-                ('courses', models.ManyToManyField(blank=True, help_text='Career path courses', to='courses.course')),
-                ('projects', models.ManyToManyField(blank=True, help_text='Career path projects', to='projects.project')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "image",
+                    models.ImageField(
+                        blank=True,
+                        help_text="Path image",
+                        null=True,
+                        upload_to="images/paths/",
+                    ),
+                ),
+                (
+                    "name",
+                    models.CharField(
+                        db_index=True, help_text="Path name", max_length=64, unique=True
+                    ),
+                ),
+                (
+                    "headline",
+                    models.CharField(
+                        db_index=True, help_text="Path headline", max_length=512
+                    ),
+                ),
+                (
+                    "description",
+                    models.CharField(
+                        db_index=True, help_text="Path description", max_length=1024
+                    ),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(auto_now_add=True, help_text="Date created"),
+                ),
+                (
+                    "updated_at",
+                    models.DateTimeField(auto_now=True, help_text="Date updated"),
+                ),
+                (
+                    "courses",
+                    models.ManyToManyField(
+                        blank=True, help_text="Career path courses", to="courses.course"
+                    ),
+                ),
+                (
+                    "projects",
+                    models.ManyToManyField(
+                        blank=True,
+                        help_text="Career path projects",
+                        to="projects.project",
+                    ),
+                ),
             ],
         ),
     ]
